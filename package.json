@@ -1,0 +1,56 @@
+{
+  "name": "passport-slim-ui",
+  "version": "1.0.3",
+  "description": "GUI components for passport-slim",
+  "scripts": {
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile",
+    "link": "cp -r lib/* ~/projects/boiler-stack/frontend/node_modules/passport-slim-ui/lib",
+    "devlink": "npm run compile && npm run link"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/binocarlos/passport-slim-ui.git"
+  },
+  "keywords": [
+    "form",
+    "redux",
+    "material"
+  ],
+  "author": "Kai Davenport",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/binocarlos/passport-slim-ui/issues"
+  },
+  "homepage": "https://github.com/binocarlos/passport-slim-ui",
+  "peerDependencies": {
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0",
+    "react-tap-event-plugin": "^2.0.0"
+  },
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "kettle-ui": "^3.6.4",
+    "material-ui": "^0.16.4",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.7.0",
+    "react-router-redux": "^4.0.5",
+    "redux": "^3.5.2",
+    "redux-saga": "^0.13.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.7.2",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-class-properties": "^6.6.0",
+    "babel-plugin-transform-runtime": "^6.6.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "babel-runtime": "^6.6.1",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-tap-event-plugin": "^2.0.0",
+    "webpack": "^2.1.0-beta.26"
+  }
+}
