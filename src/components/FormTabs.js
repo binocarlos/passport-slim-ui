@@ -15,7 +15,7 @@ const STYLES = {
     paddingBottom:'0px'
   },
   registerwrapper:{
-    paddingBottom:'1px'
+    paddingBottom:'20px'
   }
 }
 
