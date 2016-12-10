@@ -8,35 +8,24 @@ import React, { Component, PropTypes } from 'react'
 import { Route } from 'react-router'
 
 import PassportReducer from './reducer'
-import PassportSagas from './sagas'
+import PassportSaga from './sagas'
 import PassportAuth from './auth'
 import PassportRoutes from './routes'
-
-const DEFAULT_PASSPORT_SETTINGS = {
-  loginRoute:'login',
-  registerRoute:'register',
-  primaryKey:'email',
-  includeEmail:true,
-  includeUsername:false,
-  extraFields:[],
-  loginContent:(<div />),
-  registerContent:(<div />),
-  userFilter:() => true
-}
+import Settings from './settings'
 
 const passportBoiler = (passportSettings = {}) => {
 
-  let settings = {}
-  passportSettings = Object.assign({}, DEFAULT_PASSPORT_SETTINGS, passportSettings)
+  let appSettings = {}
+  passportSettings = Settings(passportSettings)
 
-  settings.sagas = (settings.sagas || []).concat(PassportSagas(settings))
-  settings.reducers = Object.assign({}, settings.reducers, {
+  appSettings.sagas = (appSettings.sagas || []).concat([PassportSaga(passportSettings)])
+  appSettings.reducers = Object.assign({}, appSettings.reducers, {
     passport:PassportReducer
   })
 
-  const originalGetRoutes = settings.getRoutes
+  const originalGetRoutes = appSettings.getRoutes
 
-  settings.getRoutes = (store) => {
+  appSettings.getRoutes = (store) => {
     const auth = PassportAuth(store, passportSettings)
 
     const originalRoutes = originalGetRoutes ? originalGetRoutes(auth) : null
@@ -50,7 +39,7 @@ const passportBoiler = (passportSettings = {}) => {
     )
   }
 
-  return settings
+  return appSettings
 }
 
 export default passportBoiler

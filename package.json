@@ -1,6 +1,6 @@
 {
   "name": "passport-slim-ui",
-  "version": "1.0.6",
+  "version": "1.0.14",
   "description": "GUI components for passport-slim",
   "scripts": {
     "compile": "babel -d lib/ src/",
@@ -27,9 +27,9 @@
     "react": "^15.0.0"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "immutability-helper": "^2.0.0",
-    "isomorphic-fetch": "^2.2.1",
-    "kettle-ui": "^3.7.0",
+    "kettle-ui": "^3.7.3",
     "material-ui": "^0.16.4",
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
