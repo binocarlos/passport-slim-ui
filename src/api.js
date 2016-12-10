@@ -1,39 +1,57 @@
 import axios from 'axios'
+import bows from 'bows'
 
 const getAPI = url => {
-  console.log('-------------------------------------------');
-  console.log('-------------------------------------------');
-  console.log('FETCH: ' + url)
-  return axios
-    .get(url, {
-      responseType: 'json'
-    })/*
-    .then(function(response) {
-      console.log(response.data);
-      console.log(response.status);
-      console.log(response.statusText);
-      console.log(response.headers);
-      console.log(response.config);
+
+  const logger = bows('passport:api GET ' + url)
+
+  return axios({
+    method: 'get',
+    url: url,
+    responseType: 'json'
+  })
+    .then(res => {
+      logger('response', res.status, res.data)
+      return res.data
+    }, err => {
+      logger('error', err.message)
+      throw err
     })
-  .catch(function (error) {
-    if (error.response) {
-      // The request was made, but the server responded with a status code
-      // that falls out of the range of 2xx
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.log('Error', error.message);
-    }
-    console.log(error.config);
-  })*/
 }
 
-const fetchUser = url => getAPI(url)
+const postAPI = (url, data) => {
+
+  const logger = bows('passport:api POST ' + url)
+
+  logger('data', data)
+
+  return axios({
+    method: 'post',
+    url: url,
+    data: data,
+    responseType: 'json',
+    transformRequest: [(data) => JSON.stringify(data)]
+  })
+    .then(res => {
+      logger('response', res.status, res.data)
+      return res.data
+    }, (err) => {
+      if (err.response && err.response.data) {
+        err.message = err.response.data.error
+      }
+      logger('error', err.message)
+      throw err
+    })
+}
+
+const status = url => getAPI(url)
+const login = (url, data) => postAPI(url, data)
+const register = (url, data) => postAPI(url, data)
 
 const api = {
-  fetchUser
+  status,
+  login,
+  register
 }
 
 export default api
