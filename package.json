@@ -1,6 +1,6 @@
 {
   "name": "passport-slim-ui",
-  "version": "1.0.14",
+  "version": "2.0.0",
   "description": "GUI components for passport-slim",
   "scripts": {
     "compile": "babel -d lib/ src/",
