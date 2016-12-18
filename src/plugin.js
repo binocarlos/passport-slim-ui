@@ -13,10 +13,8 @@ const PassportPlugin = (settings = {}) => {
 
   const passportSettings = PassportSettings(settings)
 
-  const getReducers = () => {
-    return {
-      passport:PassportReducer
-    }
+  const getReducer = () => {
+    return PassportReducer
   }
 
   const getSagas = () => {
@@ -42,7 +40,8 @@ const PassportPlugin = (settings = {}) => {
   }
 
   return {
-    getReducers,
+    id:'passport',
+    getReducer,
     getSagas,
     getSettings,
     getRouteContext,
